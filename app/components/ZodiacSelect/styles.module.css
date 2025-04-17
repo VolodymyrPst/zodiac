@@ -1,0 +1,56 @@
+.content {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+
+.image {
+  border-radius: 12px;
+  border: 2px solid #ccc;
+  padding: 8px;
+  background-color: white;
+  transition: transform 0.3 ease;
+  left: -150px;
+}
+
+.container {
+  display: flex;
+  align-items: flex-end;
+}
+
+.label {
+  margin-right: 10px;
+  font-size: 1.2rem;
+  padding: 10px;
+}
+
+.select {
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  appearance: none;
+  background-image: url("./../../../public/scroll.svg");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 25px;
+  cursor: pointer;
+  outline: none;
+  width: 150px;
+  background-color: inherit;
+  color: inherit;
+}
+
+.option {
+  font-size: 1.2rem;
+  font-weight: 600;
+  background-color: #1a1a1a;
+  color: #f0f0f0;
+}
+
+@media (max-width: 482px) {
+  .label {
+    display: none;
+  }
+}
