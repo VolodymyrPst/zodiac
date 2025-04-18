@@ -29,8 +29,6 @@ const ZodiacSelect: React.FC<ZodiacSelectProps> = ({ onZodiacChange }) => {
     const params = new URLSearchParams(window.location.search);
     const zodiacParam = params.get("zodiac");
 
-    console.log("ddd", zodiacParam);
-
     if (zodiacParam) {
       const selectedIndex = zodiacOptions.findIndex(
         (option) => option.value === zodiacParam

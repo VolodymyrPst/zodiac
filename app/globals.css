@@ -44,8 +44,3 @@ button {
   border-radius: 10px;
   cursor: pointer;
 }
-
-.button:active {
-  transform: scale(0.96);
-  box-shadow: 0 2px 4px rgba(150, 56, 56, 0.3);
-}

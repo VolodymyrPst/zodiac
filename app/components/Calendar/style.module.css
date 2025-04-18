@@ -4,3 +4,9 @@
   flex-direction: column;
   gap: 20px;
 }
+
+.list {
+  display: flex;
+  gap: 2px;
+  flex-wrap: wrap;
+}

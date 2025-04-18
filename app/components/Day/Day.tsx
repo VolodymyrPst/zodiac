@@ -1,16 +1,15 @@
 import React from "react";
 import Image from "next/image";
-import { pointsName, PointName } from "@/app/data/pointsName";
-
 import { DayProps } from "../../types/zodiac";
-
 import styles from "./styles.module.css";
+import { pointsName } from "@/app/data/pointsName";
+import { PointName } from "@/app/enums/PointName";
 
 const Day = ({ day, date, points }: DayProps) => {
   return (
     <div className={styles.day}>
       <h3>{day}</h3>
-      <p aria-label="Date of forecast">{date}</p>
+      <p>{date}</p>
       <div className={styles.content}>
         {pointsName.map((name: PointName) => (
           <div key={name} className={styles.points}>

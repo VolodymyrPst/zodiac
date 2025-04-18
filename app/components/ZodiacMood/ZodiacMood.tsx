@@ -1,35 +1,19 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { ZodiacMoodProps } from "../../types/zodiac";
-import Image from "next/image";
 import { definitionDeviation } from "../../utils/definitionDeviation";
-import { fetchCatFact } from "../../utils/fetchFacts";
-
+import { useGetCatFactQuery } from "../../services/catFactApi";
+import Image from "next/image";
 import styles from "./style.module.css";
 
-const ZodiacMood: React.FC<ZodiacMoodProps> = ({ day }) => {
-  const [catFact, setCatFact] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  if (!day) return;
+const ZodiacMood: React.FC<ZodiacMoodProps> = ({ day, catFact }) => {
+  if (!day) return null;
+
+  const { data: catFactData, error, isLoading, refetch } = useGetCatFactQuery();
 
   useEffect(() => {
-    if (!day) return;
-
-    const getFact = async () => {
-      setIsLoading(true);
-      try {
-        const fact = await fetchCatFact();
-        setCatFact(fact);
-      } catch (error) {
-        console.error("Error fetching fact:", error);
-        setCatFact("Something went wrong.");
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    getFact();
-  }, [day]);
+    refetch();
+  }, [day, refetch]);
 
   const res = definitionDeviation(
     day.points.health,
@@ -62,8 +46,12 @@ const ZodiacMood: React.FC<ZodiacMoodProps> = ({ day }) => {
         </p>
         {res.average > 20 ? (
           <p>
-            <strong>Cat Fact:</strong>{" "}
-            {isLoading ? "Loading cat fact..." : catFact}
+            <strong>Cat Fact:</strong>
+            {isLoading
+              ? "Loading cat fact..."
+              : error
+              ? "Something went wrong."
+              : catFactData?.fact || "No cat fact available"}
           </p>
         ) : (
           <p>Do your best.</p>

@@ -8,6 +8,8 @@ import { RootState } from "../../store";
 import ZodiacMood from "../ZodiacMood/ZodiacMood";
 import ZodiacSelect from "../ZodiacSelect/ZodiacSelect";
 import CopyLink from "../CopyLink/CopyLink";
+import { DateRange } from "@/app/enums/dateRange";
+import { RangeText } from "@/app/constants/forecastLabels";
 
 import styles from "./style.module.css";
 
@@ -19,7 +21,9 @@ const Calendar = () => {
   const selectedZodiac = useSelector((state: RootState) => state.zodiac);
 
   const handleChange = useCallback(() => {
-    setRange((prev) => (prev === 3 ? 7 : 3));
+    setRange((prev) =>
+      prev === DateRange.Default ? DateRange.Extended : DateRange.Default
+    );
   }, []);
 
   useEffect(() => {
@@ -46,10 +50,8 @@ const Calendar = () => {
   return (
     <div className={styles.calendar}>
       <ZodiacSelect onZodiacChange={handleZodiacChange} />
-      <button onClick={handleChange}>
-        {range === 3 ? "Forecast for 7" : "Forecast for 3"}
-      </button>
-      <div style={{ display: "flex", gap: "2px", flexWrap: "wrap" }}>
+      <button onClick={handleChange}>{RangeText[range as DateRange]}</button>
+      <div className={styles.list}>
         {forecastDays.slice(0, range).map((day, index) => (
           <li onClick={() => handleDaySelection(day)} key={index}>
             <Day key={index} {...day} />
