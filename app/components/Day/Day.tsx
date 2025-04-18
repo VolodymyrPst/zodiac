@@ -3,7 +3,7 @@ import Image from "next/image";
 import { DayProps } from "../../types/zodiac";
 import styles from "./styles.module.css";
 import { pointsName } from "@/app/data/pointsName";
-import { PointName } from "@/app/enums/pointName";
+import { PointName } from "@/app/enums/PointName";
 
 const Day = ({ day, date, points }: DayProps) => {
   return (
