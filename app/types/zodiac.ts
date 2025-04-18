@@ -19,7 +19,6 @@ export interface ZodiacSelectProps {
 
 export interface ZodiacMoodProps {
   day: DayProps | null;
-  catFact: string;
 }
 
 export interface CatFact {

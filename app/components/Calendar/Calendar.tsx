@@ -8,7 +8,7 @@ import { RootState } from "../../store";
 import ZodiacMood from "../ZodiacMood/ZodiacMood";
 import ZodiacSelect from "../ZodiacSelect/ZodiacSelect";
 import CopyLink from "../CopyLink/CopyLink";
-import { DateRange } from "@/app/enums/dateRange";
+import { DateRange } from "@/app/enums/DateRange";
 import { RangeText } from "@/app/constants/forecastLabels";
 
 import styles from "./style.module.css";
@@ -52,11 +52,15 @@ const Calendar = () => {
       <ZodiacSelect onZodiacChange={handleZodiacChange} />
       <button onClick={handleChange}>{RangeText[range as DateRange]}</button>
       <div className={styles.list}>
-        {forecastDays.slice(0, range).map((day, index) => (
-          <li onClick={() => handleDaySelection(day)} key={index}>
-            <Day key={index} {...day} />
-          </li>
-        ))}
+        {!forecastDays.length ? (
+          <div>Loading forecasts...</div>
+        ) : (
+          forecastDays.slice(0, range).map((day, index) => (
+            <li onClick={() => handleDaySelection(day)} key={index}>
+              <Day {...day} />
+            </li>
+          ))
+        )}
       </div>
       {!isZodiacChanging && selectedDay && <ZodiacMood day={selectedDay} />}
       <CopyLink />

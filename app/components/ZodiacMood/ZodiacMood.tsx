@@ -1,12 +1,12 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { ZodiacMoodProps } from "../../types/zodiac";
 import { definitionDeviation } from "../../utils/definitionDeviation";
 import { useGetCatFactQuery } from "../../services/catFactApi";
 import Image from "next/image";
 import styles from "./style.module.css";
 
-const ZodiacMood: React.FC<ZodiacMoodProps> = ({ day, catFact }) => {
+const ZodiacMood: React.FC<ZodiacMoodProps> = ({ day }) => {
   if (!day) return null;
 
   const { data: catFactData, error, isLoading, refetch } = useGetCatFactQuery();
